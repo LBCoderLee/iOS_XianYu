@@ -34,6 +34,8 @@
         //        }
 
         //[self setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]];
+
+        self.backgroundColor = [UIColor whiteColor];
         [self setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
 
         UIButton *plusBtn = [[UIButton alloc] init];
@@ -42,9 +44,11 @@
 
         self.plusBtn = plusBtn;
 
+
         [plusBtn addTarget:self action:@selector(plusBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
 
         [self addSubview:plusBtn];
+
 
 
     }
@@ -92,7 +96,7 @@
         }
     }
     
-    
+    [self bringSubviewToFront:self.plusBtn];
 }
 
 //点击了发布按钮

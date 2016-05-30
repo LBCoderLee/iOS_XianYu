@@ -97,7 +97,7 @@
     LBNavigationController *nav = [[LBNavigationController alloc] initWithRootViewController:Vc];
 
 
-    Vc.view.backgroundColor = [UIColor whiteColor];
+    Vc.view.backgroundColor = [self randomColor];
 
     UIImage *myImage = [UIImage imageNamed:image];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
