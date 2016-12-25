@@ -15,7 +15,8 @@
 @interface LBTabBar ()
 
 /** plus按钮 */
-@property (nonatomic, weak) UIButton *plusBtn ;
+@property (nonatomic, weak) UIButton *plusBtn;
+@property (nonatomic, weak) UILabel *publishLabel;
 
 @end
 
@@ -41,16 +42,19 @@
         UIButton *plusBtn = [[UIButton alloc] init];
         [plusBtn setBackgroundImage:[UIImage imageNamed:@"post_normal"] forState:UIControlStateNormal];
         [plusBtn setBackgroundImage:[UIImage imageNamed:@"post_normal"] forState:UIControlStateHighlighted];
-
-        self.plusBtn = plusBtn;
-
-
+        plusBtn.size = plusBtn.currentBackgroundImage.size;
         [plusBtn addTarget:self action:@selector(plusBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-
+        self.plusBtn = plusBtn;
         [self addSubview:plusBtn];
-
-
-
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"发布";
+        label.font = [UIFont systemFontOfSize:11];
+        [label sizeToFit];
+        label.textColor = [UIColor grayColor];
+        self.publishLabel = label;
+        [self addSubview:label];
+        
     }
     return self;
 }
@@ -64,21 +68,10 @@
     self.plusBtn.centerX = self.centerX;
     //调整发布按钮的中线点Y值
     self.plusBtn.centerY = self.height * 0.5 - 2*LBMagin ;
-
-    self.plusBtn.size = CGSizeMake(self.plusBtn.currentBackgroundImage.size.width, self.plusBtn.currentBackgroundImage.size.height);
-
-
-        UILabel *label = [[UILabel alloc] init];
-        label.text = @"发布";
-        label.font = [UIFont systemFontOfSize:11];
-        [label sizeToFit];
-        label.textColor = [UIColor grayColor];
-        [self addSubview:label];
-        label.centerX = self.plusBtn.centerX;
-        label.centerY = CGRectGetMaxY(self.plusBtn.frame) + LBMagin ;
-
-
-
+    
+    self.publishLabel.centerX = self.plusBtn.centerX;
+    self.publishLabel.centerY = CGRectGetMaxY(self.plusBtn.frame) + LBMagin ;
+    
     int btnIndex = 0;
     for (UIView *btn in self.subviews) {//遍历tabbar的子控件
         if ([btn isKindOfClass:class]) {//如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
